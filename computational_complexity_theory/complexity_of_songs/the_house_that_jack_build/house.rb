@@ -40,12 +40,12 @@ class House
   def create_order(order)
     case order
     when :random
-      Random.new.order(DATA)
+      Random
     when :mostly_random
-      MostlyRandom.new.order(DATA)
+      MostlyRandom
     else
-      Default.new.order(DATA)
-    end
+      Default
+    end.new.order(DATA)
   end
 
 end
