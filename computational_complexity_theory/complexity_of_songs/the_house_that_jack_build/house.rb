@@ -40,12 +40,24 @@ class House
   def create_order(order)
     case order
     when :random
-      DATA.shuffle
+      random_order
     when :mostly_random
-      DATA[0...-1].shuffle << DATA[-1]
+      mostly_random_order
     else
-      DATA
+      default_order
     end
+  end
+
+  def random_order
+    DATA.shuffle
+  end
+
+  def mostly_random_order
+    DATA[0...-1].shuffle << DATA[-1]
+  end
+
+  def default_order
+    DATA
   end
 
 end
