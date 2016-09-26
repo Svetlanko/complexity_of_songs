@@ -15,8 +15,14 @@ class House
     'the house that Jack built'
   ]
 
+  attr_reader :pieces
+
+  def initialize(random)
+    @pieces = DATA.shuffle if random
+  end
+
   def recite
-  	(1..DATA.length).map { |i| line(i) }.join("\n")
+  	(1..pieces.length).map { |i| line(i) }.join("\n")
   end
 
   def line(number)
@@ -26,22 +32,25 @@ class House
   private 
 
   def phrase(number)
-  	DATA.last(number).join(' ')
+    pieces.last(number).join(' ')
+  end
+
+  def pieces
+    @pieces ||= DATA
   end
 
 end
 
 class Controller
   
-  def play_house(recite = false)
-  	return House.new.recite if recite
-
-  	House.new.line(12)
+  def play_house(random = false)
+  	House.new(random).line(12)
   end
 
 end
 
-puts "\n-----\n" + Controller.new.play_house
-puts "\n--- recite ---\n" + Controller.new.play_house(recite = true)
+puts "\n--- random is false ---\n" + Controller.new.play_house
+
+puts "\n--- random is true ---\n" + Controller.new.play_house(true)
 
 
