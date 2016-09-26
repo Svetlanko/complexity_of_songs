@@ -73,14 +73,8 @@ class Controller
   private 
 
   def ordered_for_choice(choice)
-    case choice
-    when :random
-      Random
-    when :mostly_random
-      MostlyRandom
-    else
-      Default
-    end.new
+    class_name = (choice || 'default').to_s.split('_').map(&:capitalize).join
+    Object.const_get(class_name).new
   end
 
 end
