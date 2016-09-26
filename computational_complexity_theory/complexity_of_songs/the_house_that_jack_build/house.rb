@@ -1,3 +1,5 @@
+require 'pry'
+
 class House
   DATA = 
   [
@@ -18,7 +20,7 @@ class House
   attr_reader :pieces
 
   def initialize(random)
-    @pieces = DATA.shuffle if random
+    @pieces = create_order random
   end
 
   def recite
@@ -35,8 +37,15 @@ class House
     pieces.last(number).join(' ')
   end
 
-  def pieces
-    @pieces ||= DATA
+  def create_order(order)
+    case order
+    when :random
+      DATA.shuffle
+    when :mostly_random
+      DATA[0...-1].shuffle << DATA[-1]
+    else
+      DATA
+    end
   end
 
 end
@@ -51,6 +60,8 @@ end
 
 puts "\n--- random is false ---\n" + Controller.new.play_house
 
-puts "\n--- random is true ---\n" + Controller.new.play_house(true)
+puts "\n--- random ---\n" + Controller.new.play_house(:random)
+
+puts "\n--- :mostly_random ---\n" + Controller.new.play_house(:mostly_random)
 
 
