@@ -39,45 +39,42 @@ class House
 
 end
 
-class Random
-  
-  def order(data)
-    data.shuffle
-  end
-
-end
-
-class MostlyRandom
-
-  def order(data)
-    data[0...-1].shuffle << data[-1]
-  end
-
-end
-
-class Default
-
-  def order(data)
-    data
-  end
-
-end
-
-
 class Controller
   
   def play_house(choice = nil)
-    House.new(ordered_for_choice(choice)).line(12)
-  end
-
-  private 
-
-  def ordered_for_choice(choice)
-    class_name = (choice || 'default').to_s.split('_').map(&:capitalize).join
-    Object.const_get(class_name).new
+    House.new(Order.new(choice)).line(12)
   end
 
 end
+
+module Order
+
+  def self.new(choice)
+    const_get(
+      (choice || 'default').to_s.split('_').map(&:capitalize).join
+      ).new
+  end
+
+  class Default
+    def order(data)
+      data
+    end
+  end
+
+  class Random
+    def order(data)
+      data.shuffle
+    end
+  end
+
+  class MostlyRandom
+    def order(data)
+      data[0..-1].shuffle << data[-1]
+    end
+  end
+
+end
+
 
 puts "\n--- random is false ---\n" + Controller.new.play_house
 
