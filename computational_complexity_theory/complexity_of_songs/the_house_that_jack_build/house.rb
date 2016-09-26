@@ -19,8 +19,8 @@ class House
 
   attr_reader :pieces
 
-  def initialize(random)
-    @pieces = create_order random
+  def initialize(ordered)
+    @pieces = ordered.order(DATA)
   end
 
   def recite
@@ -35,17 +35,6 @@ class House
 
   def phrase(number)
     pieces.last(number).join(' ')
-  end
-
-  def create_order(order)
-    case order
-    when :random
-      Random
-    when :mostly_random
-      MostlyRandom
-    else
-      Default
-    end.new.order(DATA)
   end
 
 end
@@ -77,8 +66,21 @@ end
 
 class Controller
   
-  def play_house(random = false)
-  	House.new(random).line(12)
+  def play_house(choice = nil)
+    House.new(ordered_for_choice(choice)).line(12)
+  end
+
+  private 
+
+  def ordered_for_choice(choice)
+    case choice
+    when :random
+      Random
+    when :mostly_random
+      MostlyRandom
+    else
+      Default
+    end.new
   end
 
 end
