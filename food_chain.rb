@@ -21,10 +21,10 @@ class FoodChain
 
   	ANIMALS.each do |animal|
   	  text << first_row % animal
+  	  text << chorus if animal == 'fly'
+  	  text << the_end if animal == 'horse'
 
   	  case animal
-  	  when 'fly'
-  	  	text << chorus
   	  when 'spider'
   	  	text << 'It wriggled and jiggled and tickled inside her.'
   	  	text << recite(animal)
@@ -49,8 +49,6 @@ class FoodChain
   	  	text << 'I don\'t know how she swallowed a %s!' % animal
   	  	text << recite(animal)
         text << chorus
-  	  when 'horse'
-  	  	text << the_end
   	  end
   	end
   	text
