@@ -15,47 +15,51 @@ class Song
   	  	text << chorus
   	  when 'spider'
   	  	text << 'It wriggled and jiggled and tickled inside her.'
-  	  	text << 'She swallowed the %s to catch the fly.' % animal
+        text << swallowed('spider', 'fly')
   	  	text << chorus
   	  when 'bird'
   	  	text << 'How absurd to swallow a %s!' % animal
-  	  	text << 'She swallowed the %s to catch the spider that wriggled and jiggled and tickled inside her.' % animal
-  	    text << 'She swallowed the spider to catch the fly.'
+        text << swallowed('bird', 'spider that wriggled and jiggled and tickled inside her.')
+        text << swallowed('spider', 'fly')
   	    text << chorus
   	  when 'cat'
   	  	text << 'Imagine that, to swallow a %s!' % animal
-  	    text << 'She swallowed the %s to catch the bird.' % animal
-  	    text << 'She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.'
-  	    text << 'She swallowed the spider to catch the fly.'
+        text << swallowed('cat', 'bird')
+        text << swallowed('bird', 'spider that wriggled and jiggled and tickled inside her.')
+        text << swallowed('spider', 'fly')
   	    text << chorus
   	  when 'dog'
   	  	text << 'What a hog, to swallow a %s!' % animal
-  	  	text << 'She swallowed the %s to catch the cat.' % animal
-  	  	text << 'She swallowed the cat to catch the bird.'
-        text << 'She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.'
-        text << 'She swallowed the spider to catch the fly.'
+        text << swallowed('dog', 'cat')
+        text << swallowed('cat', 'bird')
+        text << swallowed('bird', 'spider that wriggled and jiggled and tickled inside her.')
+        text << swallowed('spider', 'fly')
         text << chorus
   	  when 'goat'
   	  	text << 'Just opened her throat and swallowed a %s!' % animal
-  	  	text << 'She swallowed the %s to catch the dog.' % animal
-  	  	text << 'She swallowed the dog to catch the cat.'
-        text << 'She swallowed the cat to catch the bird.'
-        text << 'She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.'
-        text <<'She swallowed the spider to catch the fly.'
+        text << swallowed('goat', 'dog')
+        text << swallowed('dog', 'cat')
+        text << swallowed('cat', 'bird')
+        text << swallowed('bird', 'spider that wriggled and jiggled and tickled inside her.')
+        text << swallowed('spider', 'fly')
         text << chorus
   	  when 'cow' 
   	  	text << 'I don\'t know how she swallowed a animal!' % animal
-  	  	text << 'She swallowed the %s to catch the goat.' % animal
-        text << 'She swallowed the goat to catch the dog.'
-        text << 'She swallowed the dog to catch the cat.'
-        text << 'She swallowed the cat to catch the bird.'
-        text << 'She swallowed the bird to catch the spider that wriggled and jiggled and tickled inside her.'
-        text << 'She swallowed the spider to catch the fly.'
+  	  	text << swallowed('cow', 'goat')
+        text << swallowed('goat', 'dog')
+        text << swallowed('dog', 'cat')
+        text << swallowed('cat', 'bird')
+        text << swallowed('bird', 'spider that wriggled and jiggled and tickled inside her.')
+        text << swallowed('spider', 'fly')
         text << chorus
   	  when 'horse'
   	  	text << the_end
   	  end	
   	end
+  end
+
+  def swallowed(animal1, animal2)
+  	'She swallowed the %s to catch the %s' % [ animal1, animal2 ]
   end
 
   def first_row
