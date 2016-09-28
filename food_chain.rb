@@ -1,15 +1,27 @@
 require 'pry'
 
-class Song
+class FoodChain
   
-  ANIMALS = %w(fly spider bird cat dog goat cow horse)
+  ANIMAL_AND_QUALITIES = 
+    {
+      'fly': '',
+      'spider': ' that wriggled and jiggled and tickled inside her',
+      'bird': '',
+      'cat': '',
+      'dog': '',
+      'goat': '',
+      'cow': '',
+      'horse': ''
+    }
+  
+  ANIMALS = ANIMAL_AND_QUALITIES.keys.map(&:to_s)
 
   def lyrics
   	text = []
 
-  	ANIMALS.map do |animal|
+  	ANIMALS.each do |animal|
   	  text << first_row % animal
-  	  	
+
   	  case animal
   	  when 'fly'
   	  	text << chorus
@@ -34,19 +46,20 @@ class Song
   	  	text << recite(animal)
         text << chorus
   	  when 'cow' 
-  	  	text << 'I don\'t know how she swallowed a animal!' % animal
+  	  	text << 'I don\'t know how she swallowed a %s!' % animal
   	  	text << recite(animal)
         text << chorus
   	  when 'horse'
   	  	text << the_end
   	  end
   	end
+  	text
   end
 
   def recite(animal)
     animal_pairs = swallowed_order animal
     animal_pairs.map do |pair|
-      swallowed(*pair) unless pair.any?(&:nil?)
+      swallowed(*pair)
     end
   end
 
@@ -57,7 +70,10 @@ class Song
   end
 
   def swallowed(animal1, animal2)
-  	'She swallowed the %s to catch the %s' % [ animal1, animal2 ]
+  	if animal2 == 'spider' 
+       animal2 += ANIMAL_AND_QUALITIES[animal2.to_sym]
+    end
+    'She swallowed the %s to catch the %s.' % [ animal1, animal2 ]
   end
 
   def first_row
@@ -73,9 +89,7 @@ class Song
   end
 
   def print
-    puts lyrics.join("\n")
+    lyrics.join("\n")
   end
 
 end
-
-Song.new.print

@@ -1,7 +1,12 @@
-class Text
- 
- SONG_TEXT = 
-"I know an old lady who swallowed a fly.
+require 'spec_helper'
+require 'pry'
+
+describe FoodChain do
+
+  it 'should build a song' do
+  	
+  	expected_song = <<-SONG
+I know an old lady who swallowed a fly.
 I don't know why she swallowed the fly. Perhaps she'll die.
 
 I know an old lady who swallowed a spider.
@@ -50,4 +55,10 @@ She swallowed the spider to catch the fly.
 I don't know why she swallowed the fly. Perhaps she'll die.
 
 I know an old lady who swallowed a horse.
-She's dead, of course!"	
+She's dead, of course!
+SONG
+
+   expect(FoodChain.new.print.split(/\n/)).to eq(expected_song.split(/\n/))
+  end
+
+end
