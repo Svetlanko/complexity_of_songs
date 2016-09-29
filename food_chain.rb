@@ -1,4 +1,3 @@
-require 'pry'
 require_relative 'verse'
 
 class Animal < Struct.new(:name, :feature, :aside); end
@@ -27,7 +26,7 @@ class FoodChain
 
   def lyrics
     (1..animals.count).map { |i|
-      Verse.new(animals.last(i)).build
+      Verse.new(animals.last(i)).generate
     }.join("\n")
   end
 

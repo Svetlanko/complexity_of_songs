@@ -1,9 +1,8 @@
 require 'spec_helper'
-require 'pry'
 
 describe FoodChain do
 
-  it 'should build a song' do
+  it 'should equal original song' do
   	expected_song =
 <<-SONG
 I know an old lady who swallowed a fly.

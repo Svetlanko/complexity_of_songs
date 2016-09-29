@@ -7,7 +7,7 @@ class Verse
     @length = animals.length
   end
 
-  def build
+  def generate
     incident + summary
   end
 
@@ -37,8 +37,8 @@ class Verse
 
   def motivation(predator, prey)
     "She swallowed the %s to catch the %s." % [
-        predator.name,
-        [ prey.name, prey.feature ].compact.join(" ")  #TODO: could be potentially extracted to its own method
+      predator.name,
+      [ prey.name, prey.feature ].compact.join(" ")
     ]
   end
 
