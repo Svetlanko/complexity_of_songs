@@ -26,7 +26,9 @@ class FoodChain
   end
 
   def lyrics
-  	(1..8).map { |i| Verse.new(animals.last(i)).verse }.join("\n")
+  	(1..8).map { |i|
+      Verse.new(animals.last(i)).build
+    }.join("\n")
   end
 
 end

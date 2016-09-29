@@ -7,7 +7,7 @@ class Verse
     @i = animals.count
   end
 
-  def verse
+  def build
     case i
       when 1
         "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
@@ -22,6 +22,8 @@ class Verse
         "%s\n"                                     % "I don't know why she swallowed the fly. Perhaps she'll die."
     end
   end
+
+  private
 
   def chain
     animals.last(i).each_cons(2).map do |pair|
