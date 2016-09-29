@@ -1,5 +1,3 @@
-require 'pry'
-
 class Bottle
 
   attr_reader :number
@@ -11,31 +9,28 @@ class Bottle
   end
 
   def count
-    if number == 1
-      [ number, item ]
-    elsif number == 0
-      [ 'no more', items ]
-    else
-      [ number, items ]
-    end.join(' ')
+    return combine('no more', items) if number == 0
+    return combine(number, item)     if number == 1
+
+    combine(number, items)
   end
 
   def subtract(value)
-    if number == 1
-      [ 'no more', items ]
-    elsif number == 2
-      [ number + value, item ]
-    elsif number == 0
-      [ 99, items ]
-    else
-      [ number + value, items ]
-    end.join(' ')
+    return combine(Song::NUMBER_OF_BOTTLES, items) if number == 0
+    return combine('no more', items)               if number == 1
+    return combine(number + value, item)           if number == 2
+
+    combine(number + value, items)
   end
 
   private
 
   def items
     item + 's'
+  end
+
+  def combine(number, word)
+    [ number, word ].join(' ')
   end
 
 end
