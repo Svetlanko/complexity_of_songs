@@ -17,6 +17,8 @@ class FoodChain
       'fly':    [ nil, 'I don\'t know why she swallowed the fly. Perhaps she\'ll die.' ]
     }
 
+  NUMBER_OF_ANIMALS = ANIMALS_AND_QUALITIES.count
+
   attr_reader :animals
 
   def initialize
@@ -26,7 +28,7 @@ class FoodChain
   end
 
   def lyrics
-  	(1..8).map { |i|
+  	(1..NUMBER_OF_ANIMALS).map { |i|
       Verse.new(animals.last(i)).build
     }.join("\n")
   end
