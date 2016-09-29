@@ -18,12 +18,21 @@ class Verse
       else
         "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
         "%s\n"                                     % animals.last(i).first.aside +
-        "%s\n"                                     % chain +
-        "%s\n"                                     % "I don't know why she swallowed the fly. Perhaps she'll die."
+        "%s"                                       % summary
     end
   end
 
   private
+
+  def summary
+    case i
+      when 1, 8
+        " "
+      else
+        "%s\n" % chain +
+        "%s\n" % "I don't know why she swallowed the fly. Perhaps she'll die."
+    end
+  end
 
   def chain
     animals.last(i).each_cons(2).map do |pair|
