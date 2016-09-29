@@ -9,16 +9,10 @@ class Verse
 
   def build
     case i
-      when 1
-        "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
-        "%s\n"                                     % animals.last(i).first.aside
-      when 8
-        "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
-        "%s\n"                                     % animals.last(i).first.aside
+      when 1, 8
+        incident
       else
-        "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
-        "%s\n"                                     % animals.last(i).first.aside +
-        "%s"                                       % summary
+        incident + summary
     end
   end
 
