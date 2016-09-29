@@ -1,4 +1,5 @@
 require 'pry'
+require_relative 'verse'
 
 class Animal < Struct.new(:name, :feature, :aside); end
 
@@ -17,7 +18,7 @@ class FoodChain
     }
 
   attr_reader :animals
-
+  
   def initialize
     @animals = ANIMALS_AND_QUALITIES.map do |pair|
       Animal.new(pair.first.to_s, *pair.last)
@@ -25,38 +26,7 @@ class FoodChain
   end
 
   def lyrics
-  	(1..8).map { |i| verse(i) }.join("\n")
-  end
-
-  private
-
-  def verse(i)
-    case i
-    when 1
-      "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
-      "%s\n"                                     % "I don't know why she swallowed the fly. Perhaps she'll die."
-    when 8
-      "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
-      "%s\n"                                     % "She's dead, of course!"
-    else
-      "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
-      "%s\n"                                     % animals.last(i).first.aside +
-      "%s\n"                                     % chain(i) +
-      "%s\n"                                     % "I don't know why she swallowed the fly. Perhaps she'll die."
-    end
-  end
-
-  def chain(i)
-    animals.last(i).each_cons(2).map do |pair|
-      motivation(*pair)
-    end.join("\n")
-  end
-
-  def motivation(predator, prey)
-    "She swallowed the %s to catch the %s." % [
-      predator.name,
-      [ prey.name, prey.feature ].compact.join(" ")  #TODO: could be potentially extracted to its own method
-    ]
+  	(1..8).map { |i| Verse.new(animals.last(i)).verse(i) }.join("\n")
   end
 
 end
