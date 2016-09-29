@@ -7,7 +7,7 @@ class FoodChain
   ANIMALS_AND_QUALITIES =
     {
       'fly': '',
-      'spider': ' that wriggled and jiggled and tickled inside her',
+      'spider': 'that wriggled and jiggled and tickled inside her',
       'bird': '',
       'cat': '',
       'dog': '',
@@ -25,9 +25,7 @@ class FoodChain
   end
 
   def lyrics
-  	(1..8).map do |i|
-      verse(i)
-  	end.join("\n")
+  	(1..8).map { |i| verse(i) }.join("\n")
   end
 
   private
@@ -88,14 +86,17 @@ class FoodChain
     end
   end
 
-  def chain(animals)
+  def chain
     animals.each_cons(2).map do |pair|
       motivation(*pair)
     end.join("\n")
   end
 
   def motivation(predator, prey)
-    "She swallowed the %s to catch the %s.\n" % [ predator, prey ]
+    "She swallowed the %s to catch the %s.\n" % [
+      predator.name,
+      [ prey.name, prey.feature ].compact.join(' ')  #TODO: could be potentially extracted to its own method
+    ]
   end
 
 end
