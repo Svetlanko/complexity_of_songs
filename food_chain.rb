@@ -1,8 +1,10 @@
 require 'pry'
 
+class Animal < Struct.new(:name, :feature) ; end
+
 class FoodChain
 
-  ANIMAL_AND_QUALITIES =
+  ANIMALS_AND_QUALITIES =
     {
       'fly': '',
       'spider': ' that wriggled and jiggled and tickled inside her',
@@ -14,7 +16,13 @@ class FoodChain
       'horse': ''
     }
 
-  ANIMALS = ANIMAL_AND_QUALITIES.keys.map(&:to_s)
+  attr_reader :animals
+
+  def initialize
+    @animals = ANIMALS_AND_QUALITIES.map do |pair|
+      Animal.new(pair.first.to_s, pair.last)
+    end
+  end
 
   def lyrics
   	(1..8).map do |i|
@@ -80,7 +88,7 @@ class FoodChain
     end
   end
 
-  def recite(animals)
+  def chain(animals)
     animals.each_cons(2).map do |pair|
       motivation(*pair)
     end.join("\n")
@@ -89,6 +97,5 @@ class FoodChain
   def motivation(predator, prey)
     "She swallowed the %s to catch the %s.\n" % [ predator, prey ]
   end
-
 
 end
