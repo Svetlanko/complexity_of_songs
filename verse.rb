@@ -11,10 +11,10 @@ class Verse
     case i
       when 1
         "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
-        "%s\n"                                     % "I don't know why she swallowed the fly. Perhaps she'll die."
+        "%s\n"                                     % animals.last(i).first.aside
       when 8
         "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
-        "%s\n"                                     % "She's dead, of course!"
+        "%s\n"                                     % animals.last(i).first.aside
       else
         "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
         "%s\n"                                     % animals.last(i).first.aside +
@@ -25,13 +25,15 @@ class Verse
   private
 
   def summary
-    case i
-      when 1, 8
-        " "
-      else
-        "%s\n" % chain +
-        "%s\n" % "I don't know why she swallowed the fly. Perhaps she'll die."
-    end
+   "%s\n" % chain +
+   "%s\n" % "I don't know why she swallowed the fly. Perhaps she'll die."
+  end
+
+  def incident
+    "I know an old lady who swallowed a %s.\n%s\n" % [
+      animals.last(i).first.name,
+      animals.last(i).first.aside
+    ]
   end
 
   def chain
