@@ -80,4 +80,15 @@ class FoodChain
     end
   end
 
+  def recite(animals)
+    animals.each_cons(2).map do |pair|
+      motivation(*pair)
+    end.join("\n")
+  end
+
+  def motivation(predator, prey)
+    "She swallowed the %s to catch the %s.\n" % [ predator, prey ]
+  end
+
+
 end
