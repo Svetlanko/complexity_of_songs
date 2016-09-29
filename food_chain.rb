@@ -18,7 +18,7 @@ class FoodChain
     }
 
   attr_reader :animals
-  
+
   def initialize
     @animals = ANIMALS_AND_QUALITIES.map do |pair|
       Animal.new(pair.first.to_s, *pair.last)
@@ -26,7 +26,7 @@ class FoodChain
   end
 
   def lyrics
-  	(1..8).map { |i| Verse.new(animals.last(i)).verse(i) }.join("\n")
+  	(1..8).map { |i| Verse.new(animals.last(i)).verse }.join("\n")
   end
 
 end

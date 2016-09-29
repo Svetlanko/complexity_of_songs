@@ -1,12 +1,13 @@
 class Verse
 
-  attr_reader :animals
+  attr_reader :animals, :i
 
   def initialize(animals)
     @animals = animals
+    @i = animals.count
   end
 
-  def verse(i)
+  def verse
     case i
       when 1
         "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
@@ -17,12 +18,12 @@ class Verse
       else
         "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
         "%s\n"                                     % animals.last(i).first.aside +
-        "%s\n"                                     % chain(i) +
+        "%s\n"                                     % chain +
         "%s\n"                                     % "I don't know why she swallowed the fly. Perhaps she'll die."
     end
   end
 
-  def chain(i)
+  def chain
     animals.last(i).each_cons(2).map do |pair|
       motivation(*pair)
     end.join("\n")
