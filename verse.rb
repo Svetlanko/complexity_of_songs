@@ -1,37 +1,37 @@
 class Verse
 
-  attr_reader :animals, :i
+  attr_reader :animals, :length
 
   def initialize(animals)
     @animals = animals
-    @i = animals.count
+    @length = animals.length
   end
 
   def build
-    case i
-      when 1, 8
-        incident
-      else
-        incident + summary
-    end
+    incident + summary
   end
 
   private
 
   def summary
-   "%s\n" % chain +
-   "%s\n" % "I don't know why she swallowed the fly. Perhaps she'll die."
+    case length
+      when 1, 8
+        ""
+      else
+        "%s\n" % chain +
+        "%s\n" % "I don't know why she swallowed the fly. Perhaps she'll die."
+    end
   end
 
   def incident
     "I know an old lady who swallowed a %s.\n%s\n" % [
-      animals.last(i).first.name,
-      animals.last(i).first.aside
+      animals.first.name,
+      animals.first.aside
     ]
   end
 
   def chain
-    animals.last(i).each_cons(2).map do |pair|
+    animals.each_cons(2).map do |pair|
       motivation(*pair)
     end.join("\n")
   end
