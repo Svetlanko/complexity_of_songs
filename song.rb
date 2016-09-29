@@ -1,39 +1,64 @@
+require 'pry'
+
+class Bottle
+
+  attr_reader :number
+  attr_accessor :item
+
+  def initialize(number)
+    @number = number
+    @item = self.class.name.downcase
+  end
+
+  def count
+    if number == 1
+      [ number, item ]
+    elsif number == 0
+      [ 'no more', item + 's' ]
+    else
+      [ number, item + 's']
+    end.join(' ')
+  end
+
+  def subtract(value)
+    if number == 1
+      [ 'no more', item + 's']
+    elsif number == 2
+      [ number + value, item ]
+    elsif number == 0
+      [ 99, item + 's']
+    else
+      [ number + value, item + 's' ]
+    end.join(' ')
+  end
+
+end
+
 class Song
 
   NUMBER_OF_BOTTLES = 99
-  DATA =
-      { bottles: 'bottles of beer',
-        bottle: 'bottle of beer',
-        where: 'on the wall',
-        action: 'Take one down and pass it around',
-        chore: 'Go to the store and buy some more'
-      }
+
+  SUGGESTIONS =
+    {
+      share: 'Take one down and pass it around',
+      errand: 'Go to the store and buy some more'
+    }
 
   def self.lyrics
     (0..NUMBER_OF_BOTTLES).to_a.reverse.map do |num|
-      stanza num
+      stanza Bottle.new(num)
     end.join
   end
 
   private
 
-  def self.stanza(number)
-    if number == 0
-      "%s %s %s, %s %s.\n" % [ 'No more', DATA[:bottles], DATA[:where], 'no more', DATA[:bottles]] +
-      "%s, %s %s %s.\n" % [ DATA[:chore], NUMBER_OF_BOTTLES, DATA[:bottles], DATA[:where]]
-    elsif number == 1
-      "%s %s %s, %s %s.\n" % [ number, DATA[:bottle], DATA[:where], number, DATA[:bottle] ] +
-      "%s, %s %s %s.\n" % [ DATA[:action], 'no more', DATA[:bottles], DATA[:where] ] +
-      "\n"
-    elsif number == 2
-      "%s %s %s, %s %s.\n" % [ number, DATA[:bottles], DATA[:where], number, DATA[:bottles] ] +
-      "%s, %s %s %s.\n" % [ DATA[:action], number - 1, DATA[:bottle], DATA[:where] ] +
-      "\n"
-    else
-      "%s %s %s, %s %s.\n" % [ number, DATA[:bottles], DATA[:where], number, DATA[:bottles] ] +
-      "%s, %s %s %s.\n" % [ DATA[:action], number - 1, DATA[:bottles], DATA[:where] ] +
-      "\n"
-    end
+  def self.stanza(bottle)
+    "#{bottle.count.capitalize} of beer on the wall, #{bottle.count} of beer.\n" +
+    "#{suggestion(bottle)}, #{bottle.subtract(-1)} of beer on the wall.\n\n"
+  end
+
+  def self.suggestion(bottle)
+    bottle.number == 0 ? SUGGESTIONS[:errand] : SUGGESTIONS[:share]
   end
 
 end
