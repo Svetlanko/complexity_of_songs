@@ -14,22 +14,28 @@ class Bottle
     if number == 1
       [ number, item ]
     elsif number == 0
-      [ 'no more', item + 's' ]
+      [ 'no more', items ]
     else
-      [ number, item + 's']
+      [ number, items ]
     end.join(' ')
   end
 
   def subtract(value)
     if number == 1
-      [ 'no more', item + 's']
+      [ 'no more', items ]
     elsif number == 2
       [ number + value, item ]
     elsif number == 0
-      [ 99, item + 's']
+      [ 99, items ]
     else
-      [ number + value, item + 's' ]
+      [ number + value, items ]
     end.join(' ')
+  end
+
+  private
+
+  def items
+    item + 's'
   end
 
 end
