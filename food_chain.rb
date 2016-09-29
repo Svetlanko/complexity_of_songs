@@ -1,6 +1,6 @@
 require 'pry'
 
-class Animal < Struct.new(:name, :feature) ; end
+class Animal < Struct.new(:name, :feature, :aside); end
 
 class FoodChain
 
@@ -20,7 +20,7 @@ class FoodChain
 
   def initialize
     @animals = ANIMALS_AND_QUALITIES.map do |pair|
-      Animal.new(pair.first.to_s, pair.last)
+      Animal.new(pair.first.to_s, *pair.last)
     end
   end
 
@@ -35,39 +35,14 @@ class FoodChain
     when 1
       "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
       "%s\n"                                     % "I don't know why she swallowed the fly. Perhaps she'll die."
-    when 2
-      "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
-      "%s\n"                                     % "It wriggled and jiggled and tickled inside her." +
-      "%s\n"                                     % chain(i) +
-      "%s\n"                                     % "I don't know why she swallowed the fly. Perhaps she'll die."
-    when 3
-      "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
-      "%s\n"                                     % "How absurd to swallow a bird!" +
-      "%s\n"                                     % chain(i) +
-      "%s\n"                                     % "I don't know why she swallowed the fly. Perhaps she'll die."
-    when 4
-      "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
-      "%s\n"                                     % "Imagine that, to swallow a cat!" +
-      "%s\n"                                     % chain(i) +
-      "%s\n"                                     % "I don't know why she swallowed the fly. Perhaps she'll die."
-    when 5
-      "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
-      "%s\n"                                     % "What a hog, to swallow a dog!" +
-      "%s\n"                                     % chain(i) +
-      "%s\n"                                     % "I don't know why she swallowed the fly. Perhaps she'll die."
-    when 6
-      "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
-      "%s\n"                                     % "Just opened her throat and swallowed a goat!" +
-      "%s\n"                                     % chain(i) +
-      "%s\n"                                     % "I don't know why she swallowed the fly. Perhaps she'll die."
-    when 7
-      "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
-      "%s\n"                                     % "I don't know how she swallowed a cow!" +
-      "%s\n"                                     % chain(i) +
-      "%s\n"                                     % "I don't know why she swallowed the fly. Perhaps she'll die."
     when 8
       "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
       "%s\n"                                     % "She's dead, of course!"
+    else
+      "I know an old lady who swallowed a %s.\n" % animals.last(i).first.name +
+      "%s\n"                                     % animals.last(i).first.aside +
+      "%s\n"                                     % chain(i) +
+      "%s\n"                                     % "I don't know why she swallowed the fly. Perhaps she'll die."
     end
   end
 
