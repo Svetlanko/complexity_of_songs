@@ -18,8 +18,7 @@ class Verse
       when 1, 8
         ""
       else
-        "%s\n" % chain +
-        "%s\n" % animals.last.aside
+        "%s\n%s\n" % [ chain, animals.last.aside ]
     end
   end
 
