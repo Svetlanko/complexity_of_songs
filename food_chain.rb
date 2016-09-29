@@ -6,14 +6,14 @@ class FoodChain
 
   ANIMALS_AND_QUALITIES =
     {
-      'horse':  nil,
-      'cow':    nil,
-      'goat':   nil,
-      'dog':    nil,
-      'cat':    nil,
-      'bird':   nil,
-      'spider': 'that wriggled and jiggled and tickled inside her',
-      'fly':    nil,
+      'horse':  [ nil, nil ],
+      'cow':    [ nil, 'I don\'t know how she swallowed a cow!' ],
+      'goat':   [ nil, 'Just opened her throat and swallowed a goat!' ],
+      'dog':    [ nil, 'What a hog, to swallow a dog!' ],
+      'cat':    [ nil, 'Imagine that, to swallow a cat!' ],
+      'bird':   [ nil, 'How absurd to swallow a bird!' ],
+      'spider': ['that wriggled and jiggled and tickled inside her', 'It wriggled and jiggled and tickled inside her.' ],
+      'fly':    [ nil, nil ]
     }
 
   attr_reader :animals
