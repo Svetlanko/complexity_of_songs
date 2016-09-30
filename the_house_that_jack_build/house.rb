@@ -1,6 +1,5 @@
-require 'pry'
-
 class House
+
   DATA = 
   [
   	'the horse and the hound and the horn that belonged to',
@@ -39,6 +38,7 @@ class House
 
 end
 
+
 class Controller
   
   def play_house(choice = nil)
@@ -47,12 +47,13 @@ class Controller
 
 end
 
+
 module Order
 
   def self.new(choice)
     const_get(
       (choice || 'default').to_s.split('_').map(&:capitalize).join
-      ).new
+    ).new
   end
 
   class Default
