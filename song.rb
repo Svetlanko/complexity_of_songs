@@ -39,6 +39,8 @@ class Song
 
   NUMBER_OF_BOTTLES = 99
 
+  DETAILS = { item: 'beer', location: 'on the wall' }
+
   SUGGESTIONS =
     {
       share: 'Take one down and pass it around',
@@ -54,8 +56,13 @@ class Song
   private
 
   def self.stanza(bottle)
-    "#{bottle.count.capitalize} of beer on the wall, #{bottle.count} of beer.\n" +
-    "#{suggestion(bottle)}, #{bottle.subtract(-1)} of beer on the wall.\n\n"
+    "#{bottle.count.capitalize} of #{DETAILS[:item]} #{DETAILS[:location]}, #{bottle.count} of #{DETAILS[:item]}.\n" +
+    "#{suggestion(bottle)}, #{bottle.subtract(-1)} of #{DETAILS[:item]} #{DETAILS[:location]}.\n\n"
+  end
+
+  def self.stanza1(bottle)
+    "%s of %s %s, %s of %s.\n" % [ bottle.count.capitalize, DETAILS[:item], DETAILS[:location], bottle.count, DETAILS[:item] ] +
+    "%s, %s of %s %s.\n\n" % [ suggestion(bottle), bottle.subtract(-1), DETAILS[:item], DETAILS[:location] ]
   end
 
   def self.suggestion(bottle)
