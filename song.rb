@@ -8,18 +8,18 @@ class Bottle
   end
 
   def count
-    return combine('no more', items) if number == 0
-    return combine(number, item)     if number == 1
+    return format('no more', items) if number == 0
+    return format(number, item)     if number == 1
 
-    combine(number, items)
+    format(number, items)
   end
 
   def subtract(value)
-    return combine(Song::NUMBER_OF_BOTTLES, items) if number == 0
-    return combine('no more', items)               if number == 1
-    return combine(number + value, item)           if number == 2
+    return format(Song::NUMBER_OF_BOTTLES, items) if number == 0
+    return format('no more', items)               if number == 1
+    return format(number + value, item)           if number == 2
 
-    combine(number + value, items)
+    format(number + value, items)
   end
 
   private
@@ -28,7 +28,7 @@ class Bottle
     item + 's'
   end
 
-  def combine(number, word)
+  def format(number, word)
     [ number, word ].join(' ')
   end
 
@@ -76,3 +76,4 @@ class Song
   end
 
 end
+
