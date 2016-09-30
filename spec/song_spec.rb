@@ -1,10 +1,6 @@
 require_relative '../song'
 
 describe Song do
-  let(:expected_lyrics) do
-
-
-  end
 
   it 'should generate correct lyrics' do
     expected_lyrics = <<-SONG
@@ -314,3 +310,4 @@ SONG
   end
 
 end
+
