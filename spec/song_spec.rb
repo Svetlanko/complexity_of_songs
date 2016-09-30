@@ -310,7 +310,7 @@ Go to the store and buy some more, 99 bottles of beer on the wall.
 
 SONG
 
-    expect(Song.lyrics).to eq(expected_lyrics)
+    expect(Song.new.lyrics).to eq(expected_lyrics)
   end
 
 end
