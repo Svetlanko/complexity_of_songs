@@ -1,7 +1,6 @@
 class Bottle
 
-  attr_reader :number
-  attr_accessor :item
+  attr_reader :number, :item
 
   def initialize(number)
     @number = number
