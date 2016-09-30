@@ -45,7 +45,7 @@ class Song
     }
 
   def self.lyrics
-    (0..NUMBER_OF_BOTTLES).to_a.reverse.map do |num|
+    NUMBER_OF_BOTTLES.downto(0).map do |num|	  
       stanza Bottle.new(num)
     end.join
   end
@@ -62,3 +62,4 @@ class Song
   end
 
 end
+
